@@ -7,7 +7,7 @@
 #     - NodeJS
 #     - fluent-ffmpeg
 #
-#   For more on Fluent-FFMPEG, see 
+#   For more on Fluent-FFMPEG, see
 #
 #            https://github.com/fluent-ffmpeg/node-fluent-ffmpeg
 #
@@ -23,13 +23,15 @@ RUN apk add --no-cache git
 # install pkg
 RUN npm install -g pkg
 
+RUN npm install -g pnpm
+
 ENV PKG_CACHE_PATH /usr/cache
 
 WORKDIR /usr/src/app
 
 # Bundle app source
 COPY ./src .
-RUN npm install
+RUN pnpm install
 
 # Create single binary file
 RUN pkg --targets node12-alpine-x64 /usr/src/app/package.json

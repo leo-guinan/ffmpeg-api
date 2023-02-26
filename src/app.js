@@ -14,7 +14,7 @@ timeout = 3600000;
 function handle(signal) {
     logger.info(`Received ${signal}. Exiting...`);
     process.exit(1)
-  }  
+  }
 //SIGINT is typically CTRL-C
 process.on('SIGINT', handle);
 //SIGTERM is sent to terminate process, for example docker stop sends SIGTERM
@@ -38,10 +38,6 @@ app.use('/video/extract', extract);
 var probe = require('./routes/probe.js');
 app.use('/probe', probe);
 
-require('express-readme')(app, {
-    filename: 'index.md',
-    routes: ['/'],
-});
 
 const server = app.listen(constants.serverPort, function() {
     let host = server.address().address;
@@ -73,5 +69,5 @@ app.use(function(err, req, res, next){
     let message = err.message;
     res.writeHead(code, {'content-type' : 'text/plain'});
     res.end(`${err.message}\n`);
-    
+
 });
