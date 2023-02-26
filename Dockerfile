@@ -16,7 +16,7 @@
 #
 #####################################################################
 
-FROM node:12.16.2-alpine3.11 as build
+FROM node:14.21.3-alpine3.17 as build
 
 RUN apk add --no-cache git
 
