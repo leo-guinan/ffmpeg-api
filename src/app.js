@@ -22,6 +22,9 @@ process.on('SIGTERM', handle);
 
 app.use(compression());
 
+var health = require('./routes/health.js');
+app.use(health);
+
 //routes to handle file upload for all POST methods
 var upload = require('./routes/uploadfile.js');
 app.use(upload);
