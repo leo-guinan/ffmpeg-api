@@ -17,6 +17,13 @@ router.post('/audio/to/mp3', function (req, res,next) {
     return convert(req,res,next);
 });
 
+router.post('/audio/to/flac', function (req, res,next) {
+
+    res.locals.conversion="audio";
+    res.locals.format="flac";
+    return convert(req,res,next);
+});
+
 router.post('/audio/to/wav', function (req, res,next) {
 
     res.locals.conversion="audio";
@@ -61,6 +68,10 @@ function convert(req,res,next) {
         {
             ffmpegParams.outputOptions=['-codec:a pcm_s16le' ];
         }
+        if (format === "flac")
+        {
+            ffmpegParams.outputOptions=['-codec:a flac' ];
+        }
     }
     if (conversion == "video")
     {
@@ -100,7 +111,7 @@ function convert(req,res,next) {
                 return utils.downloadFile(outputFile,null,req,res,next);
             })
             .save(outputFile);
-        
+
 }
 
 module.exports = router
