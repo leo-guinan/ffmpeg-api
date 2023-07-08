@@ -16,7 +16,7 @@
 #
 #####################################################################
 
-FROM node:14.21.3-alpine3.17 as build
+FROM node:18.14-alpine3.16 as build
 
 RUN apk add --no-cache git
 
@@ -34,7 +34,7 @@ COPY ./src .
 RUN pnpm install
 
 # Create single binary file
-RUN pkg --targets node12-alpine-x64 /usr/src/app/package.json
+RUN pkg --targets node18-alpine-x64 /usr/src/app/package.json
 
 
 FROM jrottenberg/ffmpeg:4.2-alpine311
